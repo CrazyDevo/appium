@@ -8,7 +8,7 @@ services:
       - "4444:4444"
 
   appium:
-    image: appium/appium:1.21.0
+    image: appium/appium
     container_name: appium
     environment:
       - SELENIUM_HOST=selenium-hub
@@ -22,7 +22,7 @@ services:
     image: appium/appium
     container_name: android-node
     environment:
-      - APPIUM_SERVER=http://appium:4723/wd/hub
+      - APPIUM_SERVER=http://appium:4723
     depends_on:
       - appium
 
@@ -36,8 +36,4 @@ services:
     depends_on:
       - appium
 
-networks:
-  default:
-    external:
-      name: selenium-net
 
