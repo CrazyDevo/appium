@@ -36,7 +36,3 @@ services:
     depends_on:
       - appium
 
-networks:
-  default:
-    external:
-      name: selenium-net
