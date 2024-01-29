@@ -9,7 +9,7 @@ services:
 
   appium:
     image: appium/appium
-    container_name: appium
+    container_name: appium-co
     environment:
       - SELENIUM_HOST=selenium-hub
       - SELENIUM_PORT=4444
@@ -20,7 +20,7 @@ services:
 
   android-node:
     image: appium/appium
-    container_name: android-node
+    container_name: android-node-co
     environment:
       - APPIUM_SERVER=http://appium:4723
     depends_on:
@@ -28,11 +28,11 @@ services:
 
   ios-node:
     image: quamotion/appium-docker-ios
-    container_name: ios-node
+    container_name: ios-node-co
     environment:
       - PLATFORM_VERSION=13.7
       - DEVICE_NAME=iPhone 8
-      - APPIUM_SERVER=http://appium:4723/wd/hub
+      - APPIUM_SERVER=http://appium:4723
     depends_on:
       - appium
 
