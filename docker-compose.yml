@@ -19,7 +19,7 @@ services:
       - hub
 
   android-node:
-    image: budtmo/docker-android-x86-8.1:latest
+    image: appium/appium
     container_name: android-node
     environment:
       - APPIUM_SERVER=http://appium:4723/wd/hub
@@ -35,4 +35,9 @@ services:
       - APPIUM_SERVER=http://appium:4723/wd/hub
     depends_on:
       - appium
+
+networks:
+  default:
+    external:
+      name: selenium-net
 
