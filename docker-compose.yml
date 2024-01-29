@@ -27,7 +27,7 @@ services:
       - appium
 
   ios-node:
-    image: appium/appium:1.21.0
+    image: quamotion/appium-docker-ios
     container_name: ios-node
     environment:
       - PLATFORM_VERSION=13.7
