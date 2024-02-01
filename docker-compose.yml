@@ -1,12 +1,7 @@
 version: "3"
 
 services:
-  hub:
-    image: selenium/hub:latest
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
-
+ 
   appium:
     image: appium/appium
     container_name: appium
@@ -15,23 +10,13 @@ services:
       - SELENIUM_PORT=4444
     ports:
       - "4723:4723"
-    depends_on:
-      - hub
+    
 
-  android-node:
-    image: appium/appium
+  android-node-31:
+    image: androidsdk/android-31
     environment:
-      - APPIUM_SERVER=http://appium:4723
+      - PLATFORM_VERSION=12.0
+      - DEVICE_NAME=Android_31
+      - APPIUM_SERVER=http://44.202.122.180:4723
     depends_on:
       - appium
-
-  ios-node:
-    image: quamotion/appium-docker-ios
-    environment:
-      - PLATFORM_VERSION=13.7
-      - DEVICE_NAME=iPhone 8
-      - APPIUM_SERVER=http://appium:4723
-    depends_on:
-      - appium
-
-
