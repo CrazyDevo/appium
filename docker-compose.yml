@@ -1,4 +1,8 @@
 version: '3'
+
+networks:
+  my_network:
+
 services:
   selenium-hub:
     image: selenium/hub:latest
@@ -18,9 +22,9 @@ services:
     image: appium/appium:latest
     privileged: true
     depends_on:
-     - appium
+      - appium
     environment:
-      - PLATFORM_VERSION=12.0  # Replace with the desired Android version
+      - PLATFORM_VERSION=android-12  # Replace with the desired Android version
       - DEVICE_NAME=android-emulator
     networks:
       - my_network
