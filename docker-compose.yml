@@ -26,7 +26,7 @@ services:
     environment:
       - DEVICE=android_emulator
       - EMULATOR=android_emulator
-      - VIRTUAL_DEVICE_NAME=Pixel_3_API_29
+      - VIRTUAL_DEVICE_NAME=Samsung Galaxy S10
       - APPIUM_PORT=4723
     ports:
       - "5555:5555"  # Port used for ADB connections to the emulator
