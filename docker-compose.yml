@@ -19,12 +19,16 @@ services:
       - my_network
 
   android-emulator:
-    image: appium/appium:latest
+    image: budtmo/docker-android:emulator_11.0
     privileged: true
     depends_on:
       - appium
     environment:
-      - PLATFORM_VERSION=android-12  # Replace with the desired Android version
-      - DEVICE_NAME=android-emulator
+      - DEVICE=android_emulator
+      - EMULATOR=android_emulator
+      - VIRTUAL_DEVICE_NAME=Pixel_3_API_29
+      - APPIUM_PORT=4723
+    ports:
+      - "5555:5555"  # Port used for ADB connections to the emulator
     networks:
       - my_network
