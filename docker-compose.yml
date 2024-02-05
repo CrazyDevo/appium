@@ -1,34 +1,43 @@
 version: '3'
 
 networks:
-  my_network:
+  appium-net:
+    driver: bridge
 
 services:
-  selenium-hub:
-    image: selenium/hub:latest
+  android-butmo-1:
+    image: budtmo/docker-android:emulator_13.0
+    container_name: android-butmo-1
+    environment:
+      - EMULATOR_DEVICE=Samsung Galaxy S10
+      - WEB_VNC=true
+    devices:
+      - /dev/kvm
     ports:
-      - "4444:4444"
+      - "6081:6080"  # This is the port mapping for android-butmo-1
     networks:
-      - my_network
+      - appium-net
 
-  appium:
-    image: appium/appium:latest
+  android-butmo-2:
+    image: budtmo/docker-android:emulator_13.0
+    container_name: android-butmo-2
+    environment:
+      - EMULATOR_DEVICE=Google Pixel 4
+      - WEB_VNC=true
+    devices:
+      - /dev/kvm
+    ports:
+      - "6082:6080"  # This is the port mapping for android-butmo-2
+    networks:
+      - appium-net
+
+  appium-server:
+    image: appium/appium
+    container_name: appium-server
+    network_mode: "host"
     ports:
       - "4723:4723"
-    networks:
-      - my_network
-
-  android-emulator:
-    image: budtmo/docker-android:emulator_11.0
-    privileged: true
-    depends_on:
-      - appium
     environment:
-      - DEVICE=android_emulator
-      - EMULATOR=android_emulator
-      - VIRTUAL_DEVICE_NAME=Samsung Galaxy S10
-      - APPIUM_PORT=4723
-    ports:
-      - "5555:5555"  # Port used for ADB connections to the emulator
-    networks:
-      - my_network
+      - ANDROID_EMULATOR_PORT_1=6081  # Set this to the port mapping of android-butmo-1
+      - ANDROID_EMULATOR_PORT_2=6082  # Set this to the port mapping of android-butmo-2
+      # Add other Appium configurations as needed
